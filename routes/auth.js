@@ -3,6 +3,7 @@ const router = express.Router();
 const bcrypt = require("bcryptjs");
 const jwt = require("jsonwebtoken");
 const config = require("config");
+const auth = require("../middleware/auth");
 const { check, validationResult } = require("express-validator");
 
 const User = require("../models/User");
@@ -10,8 +11,18 @@ const User = require("../models/User");
 // @route   GET  api/auth
 // @desc    Get a logged in user
 // @access  Private
-router.get("/", (req, res) => {
-  res.send("Get logged in user");
+// for private route add middleware above and
+// put auth in as param
+router.get("/", auth, async (req, res) => {
+  try {
+    // return the id from the req minus password, even though encrypted,
+    // don't want that in response
+    const user = await User.findById(req.user.id).select("-password");
+    res.json(user);
+  } catch (err) {
+    console.error(err.message);
+    res.status(500).json({ msg: "Server error" });
+  }
 });
 
 // @route   POST  api/auth
