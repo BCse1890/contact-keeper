@@ -8,6 +8,7 @@ import Login from "./components/auth/Login";
 import ContactState from "./context/contact/ContactState";
 import AuthState from "./context/auth/AuthState";
 import AlertState from "./context/alerts/AlertState";
+import PrivateRoute from "./components/routing/PrivateRoute";
 import Alert from "./components/layout/Alert";
 import setAuthToken from "./utils/setAuthToken";
 import "./App.css";
@@ -27,13 +28,12 @@ const App = () => {
               <div className="container">
                 <Alert />
                 <Switch>
-                  <Route exact path="/" component={Home} />
+                  <PrivateRoute exact path="/" component={Home} />
                   <Route exact path="/about" component={About} />
                   <Route exact path="/register" component={Register} />
                   <Route exact path="/login" component={Login} />
                 </Switch>
               </div>
-              <h1>My App</h1>
             </Fragment>
           </Router>
         </AlertState>
