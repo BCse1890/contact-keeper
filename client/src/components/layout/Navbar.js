@@ -13,7 +13,7 @@ const Navbar = ({ title, icon }) => {
 
   const onLogOut = () => {
     logout();
-    // clearContacts();
+    clearContacts();
   };
 
   const authLinks = (

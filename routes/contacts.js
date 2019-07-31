@@ -55,7 +55,8 @@ router.post(
 
       res.json(contact);
     } catch (err) {
-      console.error(er.message);
+      console.error(err.message);
+      console.log("Post failed");
       res.status(500).send("Server Error");
     }
   }
@@ -101,6 +102,7 @@ router.put("/:id", auth, async (req, res) => {
 // @desc      Delete contact
 // @access    Private
 router.delete("/:id", auth, async (req, res) => {
+  console.log("contact route delete fires on entry");
   try {
     let contact = await Contact.findById(req.params.id);
 

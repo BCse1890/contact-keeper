@@ -42,7 +42,7 @@ router.post(
         email,
         password
       });
-
+      // hash or encrypt the password
       const salt = await bcrypt.genSalt(10);
 
       user.password = await bcrypt.hash(password, salt);
